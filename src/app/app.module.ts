@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SongListComponent } from './components/songs/song-list/song-list.component';
@@ -7,6 +9,7 @@ import { SongDetailsComponent } from './components/songs/song-details/song-detai
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
 import { SidebarComponent } from './components/navigation/sidebar/sidebar.component';
 import { SongCardComponent } from './components/songs/song-card/song-card.component';
+import { CardPreloaderComponent } from './components/preloaders/card-preloader/card-preloader.component';
 
 
 @NgModule({
@@ -17,9 +20,12 @@ import { SongCardComponent } from './components/songs/song-card/song-card.compon
     NavbarComponent,
     SidebarComponent,
     SongCardComponent,
+    CardPreloaderComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

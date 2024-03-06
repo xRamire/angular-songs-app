@@ -1,0 +1,46 @@
+/* card-preloader.component.css */
+
+/* Estilos generales del preloader de tarjetas */
+.card-preloader {
+    max-width: 300px; /* Ancho máximo de la tarjeta preloader */
+    margin: auto; /* Centrar la tarjeta preloader */
+    border-radius: 0.25rem; /* Borde redondeado */
+    overflow: hidden; /* Evitar que el contenido se desborde */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Sombra de la tarjeta */
+    background-color: #ffffff; /* Color de fondo de la tarjeta */
+}
+
+/* Estilos de la imagen preloader */
+.card-image-preloader {
+    height: 200px; /* Altura de la imagen preloader */
+    background-color: #f3f3f3; /* Color de fondo de la imagen preloader */
+}
+
+/* Estilos del contenido de la tarjeta preloader */
+.card-preloader-content {
+    padding: 1.25rem; /* Espaciado interno del contenido */
+}
+
+/* Estilos del título preloader */
+.card-title-preloader {
+    font-weight: bold; /* Fuente en negrita */
+    font-size: 1.25rem; /* Tamaño de fuente */
+    margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Estilos del subtítulo preloader */
+.card-subtitle-preloader {
+    color: #666666; /* Color de texto */
+    font-size: 1rem; /* Tamaño de fuente */
+}
+
+/* Estilos de las etiquetas preloader */
+.card-tag-preloader {
+    display: inline-block; /* Mostrar en línea */
+    background-color: #e0e0e0; /* Color de fondo */
+    color: #333333; /* Color de texto */
+    padding: 0.25rem 0.5rem; /* Espaciado interno */
+    margin-right: 0.5rem; /* Margen derecho */
+    margin-bottom: 0.5rem; /* Margen inferior */
+    border-radius: 0.25rem; /* Borde redondeado */
+}

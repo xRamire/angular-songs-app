@@ -1,1 +1,12 @@
-<p>song-list works!</p>
+<div class="container mx-auto">
+    <div *ngIf="songs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+      <ng-container *ngFor="let song of songs">
+        <app-song-card 
+            [title]="song.title"
+            [artist]="song.artist"
+            [poster]="song.poster"
+            [genre]="song.genre"
+        ></app-song-card>
+      </ng-container>
+    </div>
+</div>
