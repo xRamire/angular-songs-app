@@ -1,12 +1,21 @@
 <div class="container mx-auto">
-    <div *ngIf="songs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+    <div *ngIf="songs.length > 0 else loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center fade-in">
       <ng-container *ngFor="let song of songs">
         <app-song-card 
             [title]="song.title"
             [artist]="song.artist"
             [poster]="song.poster"
             [genre]="song.genre"
+            class="fade-in"
         ></app-song-card>
       </ng-container>
     </div>
-</div>
+    <ng-template #loading>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center">
+        <ng-container *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+          <app-card-preloader></app-card-preloader>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div>
+  
