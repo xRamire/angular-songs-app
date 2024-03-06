@@ -16,9 +16,10 @@ export class SongListComponent implements OnInit {
   }
 
   loadSongs() {
-    this.songService.getSongs().subscribe(
+    this.songService.getSongsWithArtistInfo().subscribe(
       (data) => {
         this.songs = data;
+        console.log(data);
       },
       (error) => {
         console.error('Ocurrió un error al obtener las canciones:', error);
