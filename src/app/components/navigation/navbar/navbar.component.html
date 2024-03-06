@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+<nav class="bg-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white font-bold">Mi Aplicación</div>
+        <div class="hidden md:flex">
+            <a routerLink="/canciones" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Canciones</a>
+            <a routerLink="/artistas" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Artistas</a>
+            <a routerLink="/companias-discograficas" class="text-white hover:text-gray-300 cursor-pointer">Compañías Discográficas</a>
+        </div>
+
+        <div class="md:hidden">
+            <button (click)="toggleSidebar()" class="text-white hover:text-gray-300 focus:outline-none">
+                Menú
+            </button>
+        </div>
+    </div>
+
+    <app-sidebar *ngIf="showSidebar" (closeSidebarEvent)="toggleSidebar()"></app-sidebar>
+</nav>

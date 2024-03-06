@@ -1,1 +1,18 @@
-<p>sidebar works!</p>
+<aside class="text-white p-4 sidebar">
+    <div class="flex justify-between items-center mb-4">
+      <span>Menu</span>
+      <button (click)="closeSidebar()">X</button>
+    </div>
+    <ul>
+      <li>
+        <a routerLink="/canciones" class="block py-2">Canciones</a>
+      </li>
+      <li>
+        <a routerLink="/artistas" class="block py-2">Artistas</a>
+      </li>
+      <li>
+        <a routerLink="/companias-discograficas" class="block py-2">Compañías Discográficas</a>
+      </li>
+    </ul>
+</aside>
+  
