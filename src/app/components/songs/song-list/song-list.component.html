@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto relative">
     <div *ngIf="songs.length > 0 else loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center fade-in">
       <ng-container *ngFor="let song of songs">
         <app-song-card 
@@ -6,6 +6,7 @@
             [artist]="song.artistName"
             [poster]="song.poster"
             [genre]="song.genre"
+            [id]="song.id"
             class="fade-in"
         ></app-song-card>
       </ng-container>
@@ -17,5 +18,10 @@
         </ng-container>
       </div>
     </ng-template>
-  </div>
-  
+
+    <a routerLink="/new-song" class="fixed bottom-4 right-4 bg-blue-500 text-white rounded-full p-3 shadow-md hover:bg-blue-600 focus:outline-none w-12 h-12 flex items-center justify-center">
+      <mat-icon>add</mat-icon>
+    </a>
+
+</div>
+

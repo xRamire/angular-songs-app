@@ -1,0 +1,70 @@
+<div *ngIf="isCreating" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+    <mat-spinner diameter="50"></mat-spinner>
+</div>
+
+<div class="hidden md:flex max-w-md mx-auto mt-8 px-4 md:px-0" >
+    <h1>
+        Nueva canción
+    </h1>
+</div>
+
+<form class="max-w-md mx-auto mt-8 px-4 md:px-0" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-full">
+        <mat-label>Título</mat-label>
+        <input matInput placeholder="Indique el título de la canción" [(ngModel)]="newSong.title" name="title" required maxlength="50" >
+    </mat-form-field>
+
+    <mat-form-field class="w-full mt-4">
+        <mat-label>Artistas</mat-label>
+        <input matInput placeholder="Indique el o los artistas" [(ngModel)]="newSong.artist" name="artists" required maxlength="100">
+    </mat-form-field>
+
+    <mat-form-field class="w-full mt-4">
+        <mat-label>Género</mat-label>
+        <mat-chip-list #genreChipList>
+            <input placeholder="Añade un género" [matChipInputFor]="genreChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addGenre($event)" maxlength="20">
+        </mat-chip-list>
+    </mat-form-field>
+    <mat-chip *ngFor="let genre of newSong.genre" [removable]="true" (removed)="removeGenre(genre)">
+    {{ genre }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+
+    <mat-form-field class="w-full mt-4">
+        <mat-label>Compañía discográfica</mat-label>
+        <mat-chip-list #companyChipList>
+            <input placeholder="Añade una compañía" [matChipInputFor]="companyChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addCompany($event)" maxlength="50">
+        </mat-chip-list>
+    </mat-form-field>
+    <mat-chip *ngFor="let company of newSong.company" [removable]="true" (removed)="removeCompany(company)">
+    {{ company }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  
+    <mat-form-field class="w-full mt-4">
+        <mat-label>País</mat-label>
+        <mat-select placeholder="Indique la nacionalidad de la canción" [(ngModel)]="newSong.country" name="selectedCountry" required>
+            <mat-option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field class="w-full mt-4">
+        <mat-label>Año</mat-label>
+        <input matInput placeholder="Indique el año" [(ngModel)]="newSong.year" name="year" required [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      
+  
+    <mat-form-field class="w-full mt-4">
+        <mat-label>Puntuación</mat-label>
+        <input matInput placeholder="Indique la puntuación" [(ngModel)]="newSong.rating" name="rating" required
+               type="text" appRatingLimit>
+    </mat-form-field>
+      
+      
+  
+    <button mat-raised-button color="primary" type="submit" class="mt-4 w-full">Crear Canción</button>
+</form>

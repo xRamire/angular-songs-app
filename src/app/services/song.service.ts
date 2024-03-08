@@ -45,4 +45,24 @@ export class SongService {
   private getArtists(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/artists`);
   }
+
+  getSongById(id: number): Observable<any> {
+    return forkJoin({
+      song: this.http.get<any>(`${this.apiUrl}/songs/${id}`),
+      artists: this.getArtists()
+    }).pipe(
+      map(({ song, artists }) => {
+        const artist = artists.find(artist => artist.id === song.artist);
+        const artistName = artist ? artist.name : 'Unknown';
+        return { ...song, artistName };
+      })
+    );
+  }
+
+  
+
+  createSong(songData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/songs`, songData);
+  }
+  
 }

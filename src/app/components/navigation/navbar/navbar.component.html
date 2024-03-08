@@ -1,18 +1,28 @@
 <nav class="bg-blue-500 p-4">
     <div class="container mx-auto flex justify-between items-center">
-        <div class="text-white font-bold">Mi Aplicación</div>
-        <div class="hidden md:flex">
-            <a routerLink="/canciones" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Canciones</a>
-            <a routerLink="/artistas" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Artistas</a>
-            <a routerLink="/companias-discograficas" class="text-white hover:text-gray-300 cursor-pointer">Compañías Discográficas</a>
-        </div>
 
-        <div class="md:hidden">
-            <button (click)="toggleSidebar()" class="text-white hover:text-gray-300 focus:outline-none">
-                Menú
-            </button>
-        </div>
+      <div class="hidden md:flex text-white font-bold cursor-pointer" routerLink="/" >AngularSongs</div>
+      <div class="text-white font-bold md:hidden">{{ title }}</div>
+  
+      <!-- desktop -->
+      <div class="hidden md:flex">
+        <a routerLink="/" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Canciones</a>
+        <a routerLink="/" class="text-white hover:text-gray-300 mr-4 cursor-pointer">Artistas</a>
+        <a routerLink="/" class="text-white hover:text-gray-300 cursor-pointer">Compañías Discográficas</a>
+      </div>
+  
+      <!-- mobile -->
+      <div class="md:hidden">
+        <button *ngIf="showBackButton" (click)="goBack()" class="text-white hover:text-gray-300 focus:outline-none">
+          <i class="fas fa-arrow-left"></i> Atrás
+        </button>
+        <button *ngIf="!showBackButton" (click)="toggleSidebar()" class="text-white hover:text-gray-300 focus:outline-none">
+          Menú
+        </button>
+      </div>
     </div>
-
+  
+    <!-- mobile menu -->
     <app-sidebar *ngIf="showSidebar" (closeSidebarEvent)="toggleSidebar()"></app-sidebar>
-</nav>
+  </nav>
+  

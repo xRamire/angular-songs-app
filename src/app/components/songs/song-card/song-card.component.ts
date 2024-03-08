@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./song-card.component.css']
 })
 export class SongCardComponent implements OnInit {
+  @Input() id: number = 0;
   @Input() title: string = '';
   @Input() artist: string = '';
   @Input() album: string = '';
