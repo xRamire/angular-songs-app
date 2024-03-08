@@ -10,6 +10,8 @@
     "GENRE": "Género",
     "COUNTRY": "País",
     "YEAR": "Año",
-    "RATING": "Puntuación"
+    "RATING": "Puntuación",
+    "SUCCESS-CREATION": "Canción creada con éxito!",
+    "ERROR-CREATION": "Canción no ha podido ser creada."
 }
   

@@ -3,11 +3,11 @@
 </div>
 
 <div *ngIf="isSuccess" class="fixed bottom-0 left-0 right-0 mx-auto mb-4 px-4 py-2 rounded-lg bg-green-500 text-white text-center z-50 max-w-80">
-    <span>Canción creada con éxito!</span>
+    <span>{{ 'SUCCESS-CREATION' | translate}}</span>
 </div>
 
 <div *ngIf="isNotSuccess" class="fixed bottom-0 left-0 right-0 mx-auto mb-4 px-4 py-2 rounded-lg bg-red-500 text-white text-center z-50 max-w-80">
-    <span>Canción no ha podido ser creada.</span>
+    <span>{{ 'ERROR-CREATION' | translate}}</span>
 </div>
 
 
