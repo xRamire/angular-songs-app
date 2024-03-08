@@ -4,23 +4,23 @@
 
 <div class="hidden md:flex max-w-md mx-auto mt-8 px-4 md:px-0" >
     <h1>
-        Nueva canción
+        {{ 'NEW SONG' | translate}}
     </h1>
 </div>
 
 <form class="max-w-md mx-auto mt-8 px-4 md:px-0" (ngSubmit)="onSubmit()">
     <mat-form-field class="w-full">
-        <mat-label>Título</mat-label>
+        <mat-label>{{ 'TITLE' | translate}}</mat-label>
         <input matInput placeholder="Indique el título de la canción" [(ngModel)]="newSong.title" name="title" required maxlength="50" >
     </mat-form-field>
 
     <mat-form-field class="w-full mt-4">
-        <mat-label>Artistas</mat-label>
+        <mat-label>{{ 'ARTISTS' | translate}}</mat-label>
         <input matInput placeholder="Indique el o los artistas" [(ngModel)]="newSong.artist" name="artists" required maxlength="100">
     </mat-form-field>
 
     <mat-form-field class="w-full mt-4">
-        <mat-label>Género</mat-label>
+        <mat-label>{{ 'GENRE' | translate}}</mat-label>
         <mat-chip-list #genreChipList>
             <input placeholder="Añade un género" [matChipInputFor]="genreChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addGenre($event)" maxlength="20">
@@ -32,7 +32,7 @@
     </mat-chip>
 
     <mat-form-field class="w-full mt-4">
-        <mat-label>Compañía discográfica</mat-label>
+        <mat-label>{{ 'RECORD COMPANY' | translate}}</mat-label>
         <mat-chip-list #companyChipList>
             <input placeholder="Añade una compañía" [matChipInputFor]="companyChipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addCompany($event)" maxlength="50">
@@ -44,14 +44,14 @@
     </mat-chip>
   
     <mat-form-field class="w-full mt-4">
-        <mat-label>País</mat-label>
+        <mat-label>{{ 'COUNTRY' | translate}}</mat-label>
         <mat-select placeholder="Indique la nacionalidad de la canción" [(ngModel)]="newSong.country" name="selectedCountry" required>
             <mat-option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</mat-option>
         </mat-select>
     </mat-form-field>
   
     <mat-form-field class="w-full mt-4">
-        <mat-label>Año</mat-label>
+        <mat-label>{{ 'YEAR' | translate}}</mat-label>
         <input matInput placeholder="Indique el año" [(ngModel)]="newSong.year" name="year" required [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -59,12 +59,12 @@
       
   
     <mat-form-field class="w-full mt-4">
-        <mat-label>Puntuación</mat-label>
+        <mat-label>{{ 'RATING' | translate}}</mat-label>
         <input matInput placeholder="Indique la puntuación" [(ngModel)]="newSong.rating" name="rating" required
                type="text" appRatingLimit>
     </mat-form-field>
       
       
   
-    <button mat-raised-button color="primary" type="submit" class="mt-4 w-full">Crear Canción</button>
+    <button mat-raised-button color="primary" type="submit" class="mt-4 w-full">{{ 'CREATE SONG' | translate}}</button>
 </form>

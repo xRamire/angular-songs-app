@@ -1,17 +1,17 @@
-<aside class="text-white p-4 sidebar">
+<aside class="text-white p-4 sidebar md:hidden">
     <div class="flex justify-between items-center mb-4">
-      <span>Menu</span>
-      <button (click)="closeSidebar()">X</button>
+      <span>{{ 'MENU' | translate}}</span>
+      <button (click)="closeSidebar()"><mat-icon>close</mat-icon></button>
     </div>
     <ul>
       <li>
-        <a routerLink="/" class="block py-2">Canciones</a>
+        <a routerLink="/" class="block py-2">{{ 'SONGS' | translate}}</a>
       </li>
       <li>
-        <a routerLink="/" class="block py-2">Artistas</a>
+        <a routerLink="/" class="block py-2">{{ 'ARTISTS' | translate}}</a>
       </li>
       <li>
-        <a routerLink="/" class="block py-2">Compañías Discográficas</a>
+        <a routerLink="/" class="block py-2">{{ 'RECORD COMPANIES' | translate}}</a>
       </li>
     </ul>
 </aside>

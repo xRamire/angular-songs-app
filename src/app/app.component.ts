@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-songs-app';
+
+  constructor(private translateService: TranslateService) {
+    // Configurar el idioma predeterminado
+    this.translateService.setDefaultLang('es');
+  }
+
+
 }
