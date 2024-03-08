@@ -1,4 +1,3 @@
-// new-song.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -11,18 +10,6 @@ interface Country {
   name: string;
 }
 
-interface NewSong {
-  title: string;
-  artist: any;
-  genre: string[];
-  company: string[];
-  country: string;
-  year: number;
-  rating: string;
-  poster: string;
-  duration: number;
-}
-
 @Component({
   selector: 'app-new-song',
   templateUrl: './new-song.component.html',
@@ -30,25 +17,16 @@ interface NewSong {
 })
 export class NewSongComponent implements OnInit {
   
-  newSong: NewSong = {
-    title: '',
-    artist: '',
-    genre: [],
-    company: [],
-    country: '',
-    year: 0,
-    rating: '',
-    poster: 'http://dummyimage.com/400x600.png/cc0000/ffffff',
-    duration: 0
-  };
-
+  newSongForm!: FormGroup; // Formulario reactivo
+  
   countries: Country[] = Object.values(countries).map((country: any) => ({
     code: country.code,
     name: country.name
   }));
 
   isCreating: boolean = false;
-  
+  isSuccess: boolean = false;
+  isNotSuccess: boolean = false;
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -58,14 +36,34 @@ export class NewSongComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initForm();
   }
+
+  initForm(): void {
+    this.newSongForm = this.fb.group({
+      title: ['', Validators.required],
+      artist: [null, Validators.required],
+      genre: [[]],
+      company: [[]],
+      country: ['', Validators.required],
+      year: [null, Validators.required],
+      rating: ['', Validators.required]
+    });
+  }
+
+
 
   addGenre(event: any): void {
     const input = event.input;
     const value = event.value;
 
     if ((value || '').trim()) {
-      this.newSong.genre.push(value.trim());
+      const genres = this.newSongForm.get('genre');
+      if (genres) {
+        const currentGenres = genres.value || [];
+        currentGenres.push(value.trim());
+        genres.setValue(currentGenres);
+      }
     }
 
     if (input) {
@@ -74,10 +72,14 @@ export class NewSongComponent implements OnInit {
   }
 
   removeGenre(genre: string): void {
-    const index = this.newSong.genre.indexOf(genre);
-
-    if (index >= 0) {
-      this.newSong.genre.splice(index, 1);
+    const genres = this.newSongForm.get('genre');
+    if (genres) {
+      const index = genres.value.indexOf(genre);
+      if (index >= 0) {
+        const currentGenres = genres.value;
+        currentGenres.splice(index, 1);
+        genres.setValue(currentGenres);
+      }
     }
   }
 
@@ -86,7 +88,12 @@ export class NewSongComponent implements OnInit {
     const value = event.value;
 
     if ((value || '').trim()) {
-      this.newSong.company.push(value.trim());
+      const companies = this.newSongForm.get('company');
+      if (companies) {
+        const currentCompanies = companies.value || [];
+        currentCompanies.push(value.trim());
+        companies.setValue(currentCompanies);
+      }
     }
 
     if (input) {
@@ -95,56 +102,67 @@ export class NewSongComponent implements OnInit {
   }
 
   removeCompany(company: string): void {
-    const index = this.newSong.company.indexOf(company);
-
-    if (index >= 0) {
-      this.newSong.company.splice(index, 1);
+    const companies = this.newSongForm.get('company');
+    if (companies) {
+      const index = companies.value.indexOf(company);
+      if (index >= 0) {
+        const currentCompanies = companies.value;
+        currentCompanies.splice(index, 1);
+        companies.setValue(currentCompanies);
+      }
     }
   }
 
   onSubmit() {
     this.isCreating = true;
 
-    const selectedDate = new Date(this.newSong.year);
-    const selectedYear = selectedDate.getFullYear();
-    this.newSong.year = selectedYear;
-    this.newSong.artist = 1 // El motivo de asignar un número es para la coexión de datos con el resto de canciones, que llevan una ID de un artista como referencia
-    // Una opción Podría ser hacer una selección de artistas recuperando la información de la base de datos de artistas ya existentes y asignar el ID...
-
-    this.songService.createSong(this.newSong)
-    .subscribe(response => {
-      console.log('Canción creada con éxito', response);
-      this.resetForm();
-    },
-    error => {
-      console.error('No se ha podido crear la canción.', error);
+    if (this.newSongForm.valid) {
+      const formValue = this.newSongForm.value;
+      const selectedDate = new Date(formValue.year);
+      const selectedYear = selectedDate.getFullYear();
+      formValue.year = selectedYear;
+      formValue.artist = 1;      
       
-      setTimeout(() => {
-        this.isCreating = false;
-      }, 2000);
-    });
-    
+      this.songService.createSong(formValue)
+        .subscribe(response => {
+          this.resetForm();
+        },
+        error => {
+          console.error('No se ha podido crear la canción.', error);
+          setTimeout(() => {
+            this.isCreating = false;
+            this.isNotSuccess = true;
+          }, 1000);
+
+          setTimeout(() => {
+            this.isNotSuccess = false;
+          }, 3000);
+        });
+    } else {
+      console.error('El formulario no es válido. Por favor, complete todos los campos obligatorios.');
+    }
   }
 
   resetForm(): void {
-
-    this.newSong = {
+    this.newSongForm.reset({
       title: '',
-      artist: '',
+      artist: null,
       genre: [],
       company: [],
       country: '',
-      year: 0,
-      rating: '',
-      poster: 'http://dummyimage.com/400x600.png/cc0000/ffffff',
-      duration: 0
-    };
+      year: null,
+      rating: ''
+    });
 
     setTimeout(() => {
       this.isCreating = false;
-    }, 2000);
+      this.isSuccess = true;
+    }, 1000);
+
+    setTimeout(() => {
+      this.isSuccess = false;
+    }, 3000);
 
   }
-
   
 }

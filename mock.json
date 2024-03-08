@@ -169,6 +169,34 @@
       "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
       "duration": 0,
       "id": 12
+    },
+    {
+      "title": "Prueba02",
+      "artist": 1,
+      "genre": [
+        "pop"
+      ],
+      "company": [
+        "nadie"
+      ],
+      "country": "Andorra",
+      "year": 2024,
+      "rating": "5",
+      "id": 13
+    },
+    {
+      "title": "Prueba03",
+      "artist": 1,
+      "genre": [
+        "rock"
+      ],
+      "company": [
+        "yo"
+      ],
+      "country": "United Arab Emirates",
+      "year": 2024,
+      "rating": "5",
+      "id": 14
     }
   ],
   "artists": [
